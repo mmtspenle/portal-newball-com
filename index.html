@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>新球体育 · 杂志专题</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f4f9fc;
+            color: #1e2c3a;
+            line-height: 1.6;
+            padding: 0 16px 40px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .wrap {
+            max-width: 960px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* 首页横幅 — 杂志封面感 */
+        .hero {
+            background: linear-gradient(145deg, #d6eaf0 0%, #b8d9e6 100%);
+            border-radius: 32px 32px 40px 40px;
+            padding: 48px 28px 36px;
+            margin: 20px 0 28px;
+            box-shadow: 0 12px 24px rgba(33, 97, 110, 0.10);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.4);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            right: -40px;
+            width: 220px;
+            height: 220px;
+            background: radial-gradient(circle, rgba(0,168,150,0.10) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 2.4rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            color: #0a2c36;
+            position: relative;
+            z-index: 1;
+            max-width: 70%;
+        }
+
+        .hero h1 span {
+            display: block;
+            font-size: 1rem;
+            font-weight: 400;
+            letter-spacing: 0.4px;
+            color: #2d5f6b;
+            margin-top: 12px;
+            border-left: 4px solid #1a7f8c;
+            padding-left: 16px;
+            background: rgba(255,255,255,0.3);
+            backdrop-filter: blur(2px);
+            max-width: fit-content;
+            border-radius: 0 20px 20px 0;
+        }
+
+        .hero .meta-tag {
+            display: inline-block;
+            background: #1c6d7a;
+            color: white;
+            font-size: 0.75rem;
+            padding: 4px 12px;
+            border-radius: 30px;
+            margin-top: 24px;
+            letter-spacing: 0.3px;
+            background: #1b7b89;
+        }
+
+        /* 卡片网格系统 */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+            margin: 20px 0 32px;
+        }
+
+        @media (min-width: 580px) {
+            .grid-cards {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .card {
+            background: white;
+            border-radius: 28px;
+            padding: 28px 24px;
+            box-shadow: 0 6px 18px rgba(24, 80, 88, 0.06);
+            border: 1px solid #deedf2;
+            transition: transform 0.2s ease, box-shadow 0.2s;
+            backdrop-filter: blur(2px);
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 28px rgba(28, 110, 120, 0.08);
+            border-color: #b3d4de;
+        }
+
+        .card h2 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: #0b3b44;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card h2 i {
+            font-style: normal;
+            background: #d7ecef;
+            width: 32px;
+            height: 32px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: #1a6b77;
+            font-size: 1rem;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: #2d4651;
+            margin-bottom: 6px;
+        }
+
+        .card .highlight {
+            background: #ecf6f9;
+            padding: 2px 10px;
+            border-radius: 30px;
+            display: inline-block;
+            font-size: 0.8rem;
+            color: #1d6875;
+            margin-top: 8px;
+        }
+
+        .bg-note {
+            background: #e5f1f5;
+            padding: 24px 28px;
+            border-radius: 40px;
+            margin: 20px 0 16px;
+            border-left: 6px solid #1e828f;
+            font-size: 0.95rem;
+            color: #1d3c48;
+        }
+
+        .bg-note strong {
+            color: #0a505c;
+        }
+
+        /* 特别段落——简明指南 */
+        .guide-box {
+            background: white;
+            border-radius: 28px;
+            padding: 28px 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            margin: 20px 0;
+            border: 1px solid #cce2e9;
+            position: relative;
+        }
+
+        .guide-box h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #0f414d;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .guide-box h3::before {
+            content: '📌';
+            font-size: 1.2rem;
+        }
+
+        .guide-box ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 16px;
+        }
+
+        .guide-box ul li {
+            background: #edf6fa;
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: #144f5b;
+            border: 1px solid #c7dee7;
+            flex: 1 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .guide-box ul li::before {
+            content: '·';
+            font-weight: bold;
+            color: #1a7b89;
+        }
+
+        /* 页尾访问提示 — 杂志尾栏 */
+        .footer-note {
+            margin-top: 40px;
+            padding: 28px 24px 24px;
+            background: #dcf0f0;
+            border-radius: 48px 48px 24px 24px;
+            text-align: center;
+            border: 1px solid #bedbe3;
+            backdrop-filter: blur(2px);
+        }
+
+        .footer-note p {
+            font-size: 1rem;
+            color: #1c4d58;
+            max-width: 480px;
+            margin: 0 auto 12px;
+        }
+
+        .footer-note .site-link {
+            display: inline-block;
+            background: #1f7e8b;
+            color: white;
+            padding: 10px 28px;
+            border-radius: 60px;
+            font-weight: 500;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.1s;
+            margin: 6px 0 4px;
+            letter-spacing: 0.2px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .footer-note .site-link:hover {
+            background: #155f6b;
+            transform: scale(1.01);
+        }
+
+        .footer-note small {
+            display: block;
+            margin-top: 18px;
+            color: #46747d;
+            font-size: 0.75rem;
+            opacity: 0.7;
+        }
+
+        .divider {
+            width: 60px;
+            height: 4px;
+            background: #93c9d4;
+            border-radius: 4px;
+            margin: 18px auto 14px;
+        }
+
+        /* 移动端细调 */
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+                max-width: 100%;
+            }
+            .hero {
+                padding: 32px 20px 28px;
+            }
+            .card {
+                padding: 22px 18px;
+            }
+            .guide-box ul li {
+                flex: 1 1 100%;
+            }
+        }
+
+        /* 点缀色 */
+        .accent-dot {
+            color: #1b8798;
+        }
+
+        .quiet-link {
+            color: #1b6c7a;
+            text-decoration: none;
+            border-bottom: 1px dotted #9bc6d0;
+        }
+
+        .quiet-link:hover {
+            border-bottom-style: solid;
+            color: #0b4f5c;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+
+    <!-- 首页横幅 杂志封面风格 -->
+    <div class="hero">
+        <h1>
+            新球体育
+            <span>简明指南 · 运动现场</span>
+        </h1>
+        <div class="meta-tag">Vol.01 ｜ 日常篇</div>
+    </div>
+
+    <!-- 背景说明卡片 — 杂志引言 -->
+    <div class="bg-note">
+        <strong>⽣活中的赛场</strong> —— 从街头篮球到周末羽球，体育不是远方的直播，而是你抬手就能触碰的节奏。<br>
+        新球体育希望用更轻快的视线，记录这些真实的运动瞬间。不堆砌术语，只提供一种靠近的方式。
+    </div>
+
+    <!-- 三段自然介绍 · 网格卡片 -->
+    <div class="grid-cards">
+        <div class="card">
+            <h2><i>❶</i> 日常即赛场</h2>
+            <p>不必等到大赛才兴奋。下班后的三公里慢跑、小区里的乒乓声，都是运动最诚实的模样。<br>这里收录的，是那些没有被聚光灯过滤的画面。</p>
+            <span class="highlight">节奏 · 轻量 · 在场</span>
+        </div>
+        <div class="card">
+            <h2><i>❷</i> 读懂每一次移动</h2>
+            <p>跑位、传球、调整呼吸——每个动作背后都有自己的逻辑。我们用平实的语言拆解基础要领，让初学者也能找到入门的把手。</p>
+            <span class="highlight">基础 · 视角 · 拆解</span>
+        </div>
+        <div class="card">
+            <h2><i>❸</i> 装备与气候</h2>
+            <p>一双合适的鞋、一件速干衣，有时候比技术更能影响体验。偶尔也聊聊场地、天气和那些让运动更舒服的小物件。</p>
+            <span class="highlight">实用 · 分享 · 不跟风</span>
+        </div>
+        <div class="card">
+            <h2><i>❹</i> 从一个人到一群人</h2>
+            <p>约球、社群、周末小赛——运动天然带有连接属性。这里也记录那些因为共同爱好而聚在一起的面孔。</p>
+            <span class="highlight">社群 · 邀约 · 真实</span>
+        </div>
+    </div>
+
+    <!-- 简明指南 + 访问提醒 -->
+    <div class="guide-box">
+        <h3>你可能会关心的事</h3>
+        <ul>
+            <li>没有夸张的标题，只有实在的内容</li>
+            <li>每周更新运动场景与实用笔记</li>
+            <li>所有内容均来自真实体验与公开信息</li>
+            <li>如果你对某个项目感到好奇，欢迎慢慢浏览</li>
+        </ul>
+    </div>
+
+    <!-- 页尾访问提示 — 自然嵌入 a 标签 -->
+    <div class="footer-note">
+        <div class="divider"></div>
+        <p>
+            想继续阅读更多关于运动与日常的内容？<br>
+            你可以直接前往 <a href="https://portal-newball.com" class="quiet-link" style="font-weight:500;">新球体育</a> 的页面，那里保留着更完整的专辑。
+        </p>
+        <a href="https://portal-newball.com" class="site-link">新球体育</a>
+        <small>杂志式记录 · 不制造焦虑 · 不夸大体验</small>
+    </div>
+
+    <!-- 静默种子提示（仅用于变化，不显示） -->
+    <!-- 0f5e9129eacb29af -->
+</div>
+</body>
+</html>
